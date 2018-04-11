@@ -1,0 +1,77 @@
+# SQL
+
+SELECT "栏位名" FROM "表格名";    从 (FROM) 数据库中的表格内 选出 (SELECT)。
+SELECT Store_Name FROM Store_Information;
+
+SELECT DISTINCT "栏位名" FROM "表格名";   找出表格内的不同资料值。
+SELECT DISTINCT Store_Name FROM Store_Information;
+
+SELECT "栏位名" FROM "表格名" WHERE "条件";  选择性地抓资料
+SELECT Store_Name FROM Store_Information WHERE Sales > 1000; 
+
+SELECT "栏位名" FROM "表格名" WHERE "简单条件" {[AND|OR] "简单条件"}+;   
+             复杂条件是由二或多个简单条件透过 AND 或是 OR 的连接而成。一个 SQL 语句中可以有无限多个简单条件的存在。 
+            {}+ 代表{}之内的情况会发生一或多次。在这里的意思就是 AND 加简单条件及 OR 加简单条件的情况可以发生一或多次。
+            另外，我们可以用 ( ) 来代表条件的先后次序。 
+SELECT Store_Name FROM Store_Information 
+WHERE Sales > 1000 OR (Sales < 500 AND Sales > 275); 
+
+SELECT "栏位名" FROM "表格名" WHERE "栏位名" IN ('值一', '值二', ...);
+            事先已知道至少一个我们需要的值，而我们将这些知道的值都放入 IN 这个子句
+SELECT * FROM Store_Information WHERE Store_Name IN ('Los Angeles', 'San Diego'); 
+
+SELECT "栏位名" FROM " 表格名" WHERE "栏位名" BETWEEN '值一' AND '值二';
+           BETWEEN 则是让我们可以运用一个范围 (range) 内抓出数据库中的值。
+SELECT * FROM Store_Information WHERE Txn_Date BETWEEN 'Jan-06-1999' AND 'Jan-10-1999';
+
+SELECT "栏位名" FROM "表格名" WHERE "栏位名" LIKE {套式};      LIKE 能让我们依据一个套式 (pattern) 来找出我们要的资料。
+             {套式} 经常包括野卡 (wildcard). 以下是几个例子：    
+             'A_Z': 所有以 'A' 起头，另一个任何值的字原，且以 'Z' 为结尾的字串。 
+                   'ABZ' 和 'A2Z' 都符合这一个模式，而 'AKKZ' 并不符合 (因为在 A 和 Z 之间有两个字原，而不是一个字原)。
+             'ABC%': 所有以 'ABC' 起头的字串。举例来说，'ABCD' 和 'ABCABC' 都符合这个套式。
+             '%XYZ': 所有以 'XYZ' 结尾的字串。举例来说，'WXYZ' 和 'ZZXYZ' 都符合这个套式。
+             '%AN%': 所有含有 'AN' 这个套式的字串。举例来说， 'LOS ANGELES' 和 'SAN FRANCISCO' 都符合这个套式。
+SELECT * FROM Store_Information WHERE Store_Name LIKE '%AN%';
+
+AND / OR                      SELECT column_name(s) FROM table_name WHERE condition AND|OR condition
+ALTER TABLE (add column)      ALTER TABLE table_name ADD column_name datatype 
+ALTER TABLE (drop column)     ALTER TABLE table_name DROP COLUMN column_name
+AS (alias for column)         SELECT column_name AS column_alias FROM table_name
+AS (alias for table)          SELECT column_name FROM table_name  AS table_alias 
+BETWEEN                       SELECT column_name(s)  FROM table_name WHERE column_name BETWEEN value1 AND value2
+CREATE DATABASE               CREATE DATABASE database_name
+CREATE INDEX                  CREATE INDEX index_name ON table_name (column_name)
+CREATE TABLE                  CREATE TABLE table_name ( column_name1 data_type,column_name2 data_type,.......)
+CREATE UNIQUE INDEX           CREATE UNIQUE INDEX index_name ON table_name (column_name)
+CREATE VIEW                   CREATE VIEW view_name AS SELECT column_name(s) FROM table_name WHERE condition
+DELETE FROM                   DELETE FROM table_name (Note: Deletes the entire table!!) or DELETE FROM table_name WHERE condition
+DROP DATABASE                 DROP DATABASE database_name
+DROP INDEX                    DROP INDEX table_name.index_name
+DROP TABLE                    DROP TABLE table_name
+GROUP BY                      SELECT column_name1,SUM(column_name2) FROM table_name GROUP BY column_name1
+HAVING                        SELECT column_name1,SUM(column_name2) FROM table_name GROUP BY column_name1 HAVING SUM(column_name2 condition value
+IN                            SELECT column_name(s) FROM table_name WHERE column_name IN (value1,value2,..)
+INSERT INTO                   INSERT INTO table_name VALUES (value1, value2,....) 
+                              or
+                              INSERT INTO table_name (column_name1, column_name2,...)VALUES (value1, value2,....)
+LIKE                          SELECT column_name(s) FROM table_name WHERE column_name LIKE pattern
+ORDER BY                      SELECT column_name(s) FROM table_name ORDER BY column_name [ASC|DESC]
+SELECT                        SELECT column_name(s) FROM table_name
+SELECT *                      SELECT * FROM table_name
+SELECT DISTINCT               SELECT DISTINCT column_name(s) FROM table_name
+SELECT INTO (used to create backup copies of tables)
+                              SELECT * INTO new_table_name FROM original_table_name
+                              or
+                              SELECT column_name(s) INTO new_table_name FROM original_table_name
+TRUNCATE TABLE (deletes only the data inside the table)
+                              TRUNCATE TABLE table_name 
+UPDATE                        UPDATE table_name SET column_name=new_value [, column_name=new_value] WHERE column_name=some_value
+WHERE                         SELECT column_name(s) FROM table_name WHERE condition
+
+
+
+
+
+
+
+
